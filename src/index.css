@@ -120,10 +120,44 @@
 @layer base {
   * {
     @apply border-border;
+    cursor: none; /* Hide default cursor */
   }
 
   body {
     @apply bg-background text-foreground overflow-x-hidden;
+  }
+
+  /* Interactive cursor styles */
+  .magnetic-element {
+    @apply transition-transform duration-300 ease-out;
+    will-change: transform;
+    transform: translateZ(0); /* Force hardware acceleration */
+  }
+
+  .magnetic-element:hover {
+    @apply transform scale-105;
+  }
+
+  /* Ensure interactive elements get pointer cursor but still use our custom cursor */
+  button, a, .clickable {
+    cursor: none !important;
+  }
+
+  /* Performance optimizations */
+  .hardware-accelerated {
+    transform: translateZ(0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  /* Canvas optimizations */
+  canvas {
+    will-change: auto;
+    image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimize-contrast;
   }
 }
 
@@ -145,11 +179,15 @@
   /* Floating animation */
   .float {
     animation: float 6s ease-in-out infinite;
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   .float-delay {
     animation: float 6s ease-in-out infinite;
     animation-delay: -2s;
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   /* Hero background */
@@ -176,12 +214,16 @@
     border-radius: 50%;
     pointer-events: none;
     animation: particle-float 20s linear infinite;
+    will-change: transform, opacity;
+    transform: translateZ(0);
   }
 
   /* Math symbol animations */
   .math-symbol {
     @apply absolute text-primary/10 select-none pointer-events-none;
     animation: math-float 25s linear infinite;
+    will-change: transform, opacity;
+    transform: translateZ(0);
   }
 
   /* Interactive elements */

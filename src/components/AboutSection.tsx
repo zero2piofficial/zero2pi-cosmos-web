@@ -2,6 +2,9 @@ import { useEffect, useState, useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { BookOpen, Video, Users, Star, Play, Pause } from 'lucide-react';
+import { EnhancedMathVisualization } from './EnhancedMathVisualization';
+import { InteractiveEquationPlayground } from './InteractiveEquationPlayground';
+import { MorphingMathShapes } from './MorphingMathShapes';
 
 interface AnimatedEquation {
   id: number;
@@ -44,7 +47,7 @@ export const AboutSection = () => {
     {
       icon: BookOpen,
       title: 'Visual Learning',
-      description: 'Transform abstract concepts into stunning visual narratives',
+      description: 'Transform abstract concepts into simple visual narratives',
       mathConcept: 'f(x) = sin(x)',
       animation: 'wave',
       color: 'from-blue-500 to-purple-600'
@@ -144,84 +147,15 @@ export const AboutSection = () => {
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Interactive header */}
         <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-4 mb-6">
-            <h2 className="text-5xl md:text-6xl font-bold gradient-text">
+          <div className="mb-6">
+            <h2 className="text-5xl md:text-6xl font-bold gradient-text leading-tight pb-2">
               Mathematics Reimagined
             </h2>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => setIsPlaying(!isPlaying)}
-              className="glow-border hover:bg-primary/10"
-            >
-              {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-            </Button>
           </div>
           
-          {/* Mathematical visualization */}
-          <div className="relative h-40 mb-8 overflow-hidden rounded-2xl bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/5 backdrop-blur-sm border border-primary/10">
-            <svg className="w-full h-full" viewBox="0 0 800 160" preserveAspectRatio="xMidYMid meet">
-              {/* Subtle grid */}
-              <defs>
-                <pattern id="mathGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="hsl(var(--primary))" strokeWidth="0.5" opacity="0.1"/>
-                </pattern>
-                <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.8" />
-                  <stop offset="50%" stopColor="hsl(var(--secondary))" stopOpacity="0.9" />
-                  <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.8" />
-                </linearGradient>
-                <filter id="glow">
-                  <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                  <feMerge> 
-                    <feMergeNode in="coloredBlur"/>
-                    <feMergeNode in="SourceGraphic"/>
-                  </feMerge>
-                </filter>
-              </defs>
-              
-              <rect width="100%" height="100%" fill="url(#mathGrid)" />
-              
-              {/* Mathematical function: sin(x) * cos(x/2) */}
-              <path
-                d="M0,80 Q100,40 200,80 Q300,120 400,80 Q500,40 600,80 Q700,120 800,80"
-                fill="none"
-                stroke="url(#waveGradient)"
-                strokeWidth="3"
-                filter="url(#glow)"
-                className="opacity-90"
-              />
-              
-              {/* Secondary wave for depth */}
-              <path
-                d="M0,90 Q150,60 300,90 Q450,120 600,90 Q750,60 800,90"
-                fill="none"
-                stroke="hsl(var(--secondary))"
-                strokeWidth="2"
-                opacity="0.4"
-              />
-              
-              {/* Animated points */}
-              <circle r="5" fill="hsl(var(--primary))" filter="url(#glow)">
-                <animateMotion
-                  dur="6s"
-                  repeatCount="indefinite"
-                  path="M0,80 Q100,40 200,80 Q300,120 400,80 Q500,40 600,80 Q700,120 800,80"
-                />
-              </circle>
-              
-              <circle r="3" fill="hsl(var(--secondary))" opacity="0.8">
-                <animateMotion
-                  dur="8s"
-                  repeatCount="indefinite"
-                  path="M0,90 Q150,60 300,90 Q450,120 600,90 Q750,60 800,90"
-                />
-              </circle>
-              
-              {/* Axis labels */}
-              <text x="20" y="20" fill="hsl(var(--primary))" fontSize="12" opacity="0.6" fontFamily="monospace">f(x) = sin(x)cos(x/2)</text>
-              <text x="720" y="150" fill="hsl(var(--secondary))" fontSize="10" opacity="0.5" fontFamily="monospace">x</text>
-            </svg>
+          {/* Enhanced Mathematical Visualization */}
+          <div className="mb-8">
+            <EnhancedMathVisualization />
           </div>
 
           <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
@@ -236,7 +170,8 @@ export const AboutSection = () => {
           {features.map((feature, index) => (
             <Card 
               key={index} 
-              className="group relative p-8 interactive-card bg-card/30 backdrop-blur-sm glow-border overflow-hidden"
+              className="group relative p-8 interactive-card bg-card/30 backdrop-blur-sm glow-border overflow-hidden magnetic-element"
+              data-magnetic-strength="1.2"
               onMouseEnter={() => setHoveredCard(index)}
               onMouseLeave={() => setHoveredCard(null)}
             >
@@ -308,6 +243,16 @@ export const AboutSection = () => {
           ))}
         </div>
 
+        {/* Interactive Equation Playground */}
+        <div className="mb-20">
+          <InteractiveEquationPlayground />
+        </div>
+
+        {/* Morphing Mathematical Shapes */}
+        <div className="mb-20">
+          <MorphingMathShapes />
+        </div>
+
         {/* Interactive mathematical playground */}
         <div className="text-center">
           <div className="relative inline-block p-12 rounded-3xl bg-gradient-to-br from-primary/5 to-secondary/5 backdrop-blur-sm glow-border">
@@ -331,18 +276,19 @@ export const AboutSection = () => {
 
             <div className="relative z-10">
               <h3 className="text-3xl font-bold mb-6 gradient-text">
-                Ready to explore the universe of mathematics?
+                Ready to explore ideas behind numbers?
               </h3>
               <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-lg">
-                Join thousands of learners discovering the elegant connections between numbers, 
-                patterns, and the fundamental laws that govern our reality.
+              Join thousands of others exploring the patterns, numbers, 
+              and ideas that shape the world we live in.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
                   variant="hero" 
                   size="xl"
-                  className="group relative overflow-hidden"
+                  className="group relative overflow-hidden magnetic-element"
+                  data-magnetic-strength="1.8"
                   onClick={() => window.open('https://youtube.com/@zero2pi', '_blank')}
                 >
                   <Video className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
@@ -353,7 +299,8 @@ export const AboutSection = () => {
                 <Button 
                   variant="outline" 
                   size="xl"
-                  className="glow-border hover:bg-muted/10 border-primary/30 group"
+                  className="glow-border hover:bg-muted/10 border-primary/30 group magnetic-element"
+                  data-magnetic-strength="1.5"
                 >
                   <Star className="mr-2 h-5 w-5 group-hover:rotate-180 transition-transform duration-500" />
                   Latest Discovery

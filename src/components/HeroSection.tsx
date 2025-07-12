@@ -86,11 +86,11 @@ export const HeroSection = () => {
       <div className="container mx-auto px-6 text-center z-10 relative">
         <div className="max-w-4xl mx-auto">
           {/* Animated logo/brand */}
-          <div className="mb-8 float">
+          <div className="mb-8 float hardware-accelerated">
             <h1 className="text-6xl md:text-8xl font-bold gradient-text mb-4 tracking-tight">
               zero2pi
             </h1>
-            <div className="w-32 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full animate-pulse-glow" />
+            <div className="w-32 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full animate-pulse-glow hardware-accelerated" />
           </div>
 
           {/* Tagline */}
@@ -101,8 +101,8 @@ export const HeroSection = () => {
           </p>
 
           <p className="text-lg text-muted-foreground/80 mb-12 max-w-xl mx-auto">
-            Exploring the elegance of mathematics through engaging video content. 
-            From fundamental concepts to advanced theories.
+          I make math videos that explain things the way I wish someone had explained them to me.
+          No overcomplicated terms, just clear ideas and visual thinking.
           </p>
 
           {/* Action buttons */}
@@ -110,7 +110,8 @@ export const HeroSection = () => {
             <Button 
               variant="hero" 
               size="xl"
-              className="group relative overflow-hidden"
+              className="group relative overflow-hidden magnetic-element"
+              data-magnetic-strength="1.5"
               onClick={() => window.open('https://youtube.com/@zero2pi', '_blank')}
             >
               <Youtube className="mr-2 h-5 w-5" />
@@ -121,7 +122,9 @@ export const HeroSection = () => {
             <Button 
               variant="outline" 
               size="xl"
-              className="glow-border hover:bg-muted/10 border-primary/30"
+              className="glow-border hover:bg-muted/10 border-primary/30 magnetic-element"
+              data-magnetic-strength="1.2"
+              onClick={() => window.open('https://www.youtube.com/watch?v=p1Am_-nRSPM', '_blank')}
             >
               <Play className="mr-2 h-5 w-5" />
               Featured Video
@@ -131,15 +134,15 @@ export const HeroSection = () => {
 
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
-            <div className="text-center float">
+            <div className="text-center float hardware-accelerated">
               <div className="text-3xl font-bold gradient-text mb-2">∞</div>
               <div className="text-sm text-muted-foreground">Mathematical Concepts</div>
             </div>
-            <div className="text-center float-delay">
+            <div className="text-center float-delay hardware-accelerated">
               <div className="text-3xl font-bold gradient-text mb-2">π</div>
               <div className="text-sm text-muted-foreground">From Zero to Pi</div>
             </div>
-            <div className="text-center float">
+            <div className="text-center float hardware-accelerated">
               <div className="text-3xl font-bold gradient-text mb-2">∫</div>
               <div className="text-sm text-muted-foreground">Beautiful Explanations</div>
             </div>

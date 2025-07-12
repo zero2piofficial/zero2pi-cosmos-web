@@ -1,105 +1,87 @@
-import { Youtube, Github, Mail, Heart } from 'lucide-react';
+import { Youtube, Github, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export const Footer = () => {
   return (
-    <footer className="border-t border-border/50 bg-background/80 backdrop-blur-sm">
-      <div className="container mx-auto px-6 py-12">
-        {/* Main footer content */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {/* Brand section */}
-          <div className="space-y-4">
-            <h3 className="text-2xl font-bold gradient-text">zero2pi</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
-              Transforming mathematical education through beautiful, engaging video content. 
-              Making complex concepts accessible to everyone.
-            </p>
-          </div>
-
-          {/* Quick links */}
-          <div className="space-y-4">
-            <h4 className="font-semibold text-foreground">Explore</h4>
-            <div className="space-y-2">
-              <div>
-                <a 
-                  href="https://youtube.com/@zero2pi" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                >
-                  Latest Videos
-                </a>
-              </div>
-              <div>
-                <a 
-                  href="https://youtube.com/@zero2pi/playlists" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                >
-                  Playlists
-                </a>
-              </div>
-              <div>
-                <a 
-                  href="https://youtube.com/@zero2pi/about" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                >
-                  About Channel
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Connect section */}
-          <div className="space-y-4">
-            <h4 className="font-semibold text-foreground">Connect</h4>
-            <div className="flex space-x-3">
-              <Button 
-                variant="outline" 
-                size="icon"
-                className="glow-border hover:bg-primary/10"
-                onClick={() => window.open('https://youtube.com/@zero2pi', '_blank')}
-              >
-                <Youtube className="h-4 w-4" />
-              </Button>
-              <Button 
-                variant="outline" 
-                size="icon"
-                className="glow-border hover:bg-primary/10"
-                onClick={() => window.open('https://github.com/zero2pi', '_blank')}
-              >
-                <Github className="h-4 w-4" />
-              </Button>
-              <Button 
-                variant="outline" 
-                size="icon"
-                className="glow-border hover:bg-primary/10"
-                onClick={() => window.open('mailto:contact@zero2pi.com', '_blank')}
-              >
-                <Mail className="h-4 w-4" />
-              </Button>
-            </div>
-            <p className="text-muted-foreground text-sm">
-              Have questions? Reach out and let's discuss mathematics!
-            </p>
-          </div>
-        </div>
-
-        {/* Bottom section */}
-        <div className="border-t border-border/50 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-            <span>Made with</span>
-            <Heart className="h-4 w-4 text-primary animate-pulse" />
-            <span>for mathematics education</span>
-          </div>
+    <footer className="relative overflow-hidden">
+      {/* Subtle background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/95 to-background/80" />
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5" />
+      
+      {/* Top border with gradient */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+      
+      <div className="relative container mx-auto px-6 py-12">
+        {/* Main content centered */}
+        <div className="flex flex-col items-center space-y-8">
           
-          <div className="text-sm text-muted-foreground">
-            © 2024 zero2pi. Inspiring mathematical minds.
+          {/* Brand logo */}
+          <div className="text-center">
+            <h3 className="text-xl font-bold gradient-text mb-2">zero2pi</h3>
+            <p className="text-sm text-muted-foreground/80">When zero meets infinity</p>
+          </div>
+
+          {/* Social icons with enhanced styling */}
+          <div className="flex justify-center space-x-6">
+            <Button 
+              variant="outline" 
+              size="icon"
+              className="w-12 h-12 glow-border hover:bg-primary/10 hover:border-primary/50 magnetic-element group transition-all duration-300"
+              data-magnetic-strength="1.2"
+              onClick={() => window.open('https://youtube.com/@zero2pi', '_blank')}
+            >
+              <Youtube className="h-5 w-5 group-hover:scale-110 transition-transform" />
+            </Button>
+            <Button 
+              variant="outline" 
+              size="icon"
+              className="w-12 h-12 glow-border hover:bg-primary/10 hover:border-primary/50 magnetic-element group transition-all duration-300"
+              data-magnetic-strength="1.2"
+              onClick={() => window.open('https://github.com/zero2pi', '_blank')}
+            >
+              <Github className="h-5 w-5 group-hover:scale-110 transition-transform" />
+            </Button>
+            <Button 
+              variant="outline" 
+              size="icon"
+              className="w-12 h-12 glow-border hover:bg-primary/10 hover:border-primary/50 magnetic-element group transition-all duration-300"
+              data-magnetic-strength="1.2"
+              onClick={() => window.open('mailto:info.zero2pi@gmail.com', '_blank')}
+            >
+              <Mail className="h-5 w-5 group-hover:scale-110 transition-transform" />
+            </Button>
+          </div>
+
+          {/* Decorative mathematical symbols */}
+          <div className="flex items-center space-x-8 opacity-20">
+            <span className="text-2xl font-mono text-primary">π</span>
+            <span className="text-lg font-mono text-secondary">∫</span>
+            <span className="text-2xl font-mono text-primary">∞</span>
+            <span className="text-lg font-mono text-secondary">∑</span>
+            <span className="text-2xl font-mono text-primary">√</span>
+          </div>
+
+          {/* Bottom divider */}
+          <div className="w-24 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+
+          {/* Copyright with better styling */}
+          <div className="text-center">
+            <p className="text-sm text-muted-foreground/70">
+              © 2025 <span className="gradient-text font-medium">zero2pi</span>
+            </p>
+            <p className="text-xs text-muted-foreground/50 mt-1">
+              Inspiring mathematical minds across the universe
+            </p>
           </div>
         </div>
+      </div>
+
+      {/* Floating mathematical particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-4 left-1/4 w-1 h-1 bg-primary/30 rounded-full animate-pulse" />
+        <div className="absolute top-8 right-1/3 w-1 h-1 bg-secondary/30 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-6 left-1/3 w-1 h-1 bg-primary/30 rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute bottom-4 right-1/4 w-1 h-1 bg-secondary/30 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
       </div>
     </footer>
   );
