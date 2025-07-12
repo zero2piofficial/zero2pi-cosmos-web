@@ -114,41 +114,89 @@ export const EnhancedMathVisualization = () => {
   ];
 
   const evaluateFunction = useCallback((x: number, functionId: string, t: number = 0): number => {
-    const scaledX = (x - 400) / 50; // Scale and center
+    const canvas = canvasRef.current;
+    if (!canvas) return 0;
     
-    switch (functionId) {
-      case 'sine-wave':
-        return 200 + amplitude * 80 * Math.sin(frequency * scaledX + phase + t * 0.02);
-      case 'complex-wave':
-        return 200 + 60 * Math.sin(scaledX + t * 0.02) * Math.cos(scaledX / 2);
-      case 'exponential':
-        return 350 - Math.min(300, Math.exp(scaledX / 3));
-      case 'polynomial':
-        const poly = scaledX * scaledX * scaledX - 3 * scaledX * scaledX + 2 * scaledX;
-        return 200 - poly * 5;
-      case 'fourier':
-        let sum = 0;
-        for (let n = 1; n <= 10; n++) {
-          sum += Math.sin(n * scaledX + t * 0.02) / n;
-        }
-        return 200 + sum * 30;
-      case 'mandelbrot':
-        // Simplified mandelbrot visualization
-        const real = scaledX / 20;
-        const imag = 0;
-        let zReal = 0, zImag = 0;
-        let iterations = 0;
-        
-        while (zReal * zReal + zImag * zImag < 4 && iterations < 50) {
-          const tempReal = zReal * zReal - zImag * zImag + real;
-          zImag = 2 * zReal * zImag + imag;
-          zReal = tempReal;
-          iterations++;
-        }
-        
-        return 200 + (iterations / 50) * 150;
-      default:
-        return 200;
+    const width = canvas.width;
+    const height = canvas.height;
+    const isMobile = width < 768; // Mobile breakpoint
+    
+    if (isMobile) {
+      // Mobile: Use responsive scaling
+      const centerY = height / 2;
+      const centerX = width / 2;
+      const scaledX = (x - centerX) / (width * 0.1);
+      
+      switch (functionId) {
+        case 'sine-wave':
+          return centerY + amplitude * (height * 0.15) * Math.sin(frequency * scaledX + phase + t * 0.02);
+        case 'complex-wave':
+          return centerY + (height * 0.12) * Math.sin(scaledX + t * 0.02) * Math.cos(scaledX / 2);
+        case 'exponential':
+          return centerY + (height * 0.3) - Math.min(height * 0.6, Math.exp(scaledX / 3));
+        case 'polynomial':
+          const poly = scaledX * scaledX * scaledX - 3 * scaledX * scaledX + 2 * scaledX;
+          return centerY - poly * (height * 0.02);
+        case 'fourier':
+          let sum = 0;
+          for (let n = 1; n <= 10; n++) {
+            sum += Math.sin(n * scaledX + t * 0.02) / n;
+          }
+          return centerY + sum * (height * 0.08);
+        case 'mandelbrot':
+          const real = scaledX / 20;
+          const imag = 0;
+          let zReal = 0, zImag = 0;
+          let iterations = 0;
+          
+          while (zReal * zReal + zImag * zImag < 4 && iterations < 50) {
+            const tempReal = zReal * zReal - zImag * zImag + real;
+            zImag = 2 * zReal * zImag + imag;
+            zReal = tempReal;
+            iterations++;
+          }
+          
+          return centerY + (iterations / 50) * (height * 0.3);
+        default:
+          return centerY;
+      }
+    } else {
+      // Desktop: Use original hardcoded values
+      const scaledX = (x - 400) / 50;
+      
+      switch (functionId) {
+        case 'sine-wave':
+          return 200 + amplitude * 80 * Math.sin(frequency * scaledX + phase + t * 0.02);
+        case 'complex-wave':
+          return 200 + 60 * Math.sin(scaledX + t * 0.02) * Math.cos(scaledX / 2);
+        case 'exponential':
+          return 350 - Math.min(300, Math.exp(scaledX / 3));
+        case 'polynomial':
+          const poly = scaledX * scaledX * scaledX - 3 * scaledX * scaledX + 2 * scaledX;
+          return 200 - poly * 5;
+        case 'fourier':
+          let sum = 0;
+          for (let n = 1; n <= 10; n++) {
+            sum += Math.sin(n * scaledX + t * 0.02) / n;
+          }
+          return 200 + sum * 30;
+        case 'mandelbrot':
+          const real = scaledX / 20;
+          const imag = 0;
+          let zReal = 0, zImag = 0;
+          let iterations = 0;
+          
+          while (zReal * zReal + zImag * zImag < 4 && iterations < 50) {
+            const tempReal = zReal * zReal - zImag * zImag + real;
+            zImag = 2 * zReal * zImag + imag;
+            zReal = tempReal;
+            iterations++;
+          }
+          
+          return 200 + (iterations / 50) * 150;
+        default:
+          return 200;
+      }
     }
   }, [amplitude, frequency, phase]);
 
@@ -364,22 +412,22 @@ export const EnhancedMathVisualization = () => {
         {/* Interactive overlay */}
         <div className="absolute inset-0 pointer-events-none">
           {/* Function info display */}
-          <div className="absolute top-4 left-4 bg-background/90 backdrop-blur-sm rounded-lg p-4 border border-primary/20">
-            <h3 className="font-bold text-lg gradient-text mb-2">
+          <div className="absolute top-4 left-4 bg-background/90 backdrop-blur-sm rounded-lg p-2 md:p-4 border border-primary/20">
+            <h3 className="font-bold text-sm md:text-lg gradient-text mb-1 md:mb-2">
               {mathFunctions[currentFunction].name}
             </h3>
-            <p className="text-sm text-muted-foreground mb-2 font-mono">
+            <p className="text-xs md:text-sm text-muted-foreground mb-1 md:mb-2 font-mono">
               {mathFunctions[currentFunction].equation}
             </p>
-            <p className="text-xs text-muted-foreground max-w-xs">
+            <p className="text-xs text-muted-foreground max-w-xs hidden md:block">
               {mathFunctions[currentFunction].description}
             </p>
-            <div className="flex items-center gap-2 mt-2">
-              <div className="text-xs bg-primary/20 px-2 py-1 rounded">
+            <div className="flex items-center gap-1 md:gap-2 mt-1 md:mt-2">
+              <div className="text-xs bg-primary/20 px-1 md:px-2 py-1 rounded">
                 {mathFunctions[currentFunction].category}
               </div>
-              <div className="text-xs bg-secondary/20 px-2 py-1 rounded">
-                Complexity: {mathFunctions[currentFunction].complexity}/5
+              <div className="text-xs bg-secondary/20 px-1 md:px-2 py-1 rounded">
+                {mathFunctions[currentFunction].complexity}/5
               </div>
             </div>
           </div>

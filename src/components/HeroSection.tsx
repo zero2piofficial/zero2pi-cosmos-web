@@ -83,7 +83,7 @@ export const HeroSection = () => {
       ))}
 
       {/* Main content */}
-      <div className="container mx-auto px-6 text-center z-10 relative">
+      <div className="container mx-auto px-6 text-center z-10 relative pt-16 sm:pt-8 md:pt-0">
         <div className="max-w-4xl mx-auto">
           {/* Animated logo/brand */}
           <div className="mb-8 float hardware-accelerated">

@@ -15,7 +15,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <InteractiveCursor />
-      <BrowserRouter basename="/zero2pi-cosmos-web">
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

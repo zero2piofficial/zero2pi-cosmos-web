@@ -254,8 +254,8 @@ export const AboutSection = () => {
         </div>
 
         {/* Interactive mathematical playground */}
-        <div className="text-center">
-          <div className="relative inline-block p-12 rounded-3xl bg-gradient-to-br from-primary/5 to-secondary/5 backdrop-blur-sm glow-border">
+        <div className="text-center px-4">
+          <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-2xl xl:max-w-4xl mx-auto p-4 sm:p-6 md:p-8 lg:p-12 rounded-3xl bg-gradient-to-br from-primary/5 to-secondary/5 backdrop-blur-sm glow-border">
             {/* Floating mathematical symbols */}
             <div className="absolute inset-0 overflow-hidden rounded-3xl">
               {['π', 'e', '∞', '∑', '∫'].map((symbol, i) => (
@@ -275,19 +275,19 @@ export const AboutSection = () => {
             </div>
 
             <div className="relative z-10">
-              <h3 className="text-3xl font-bold mb-6 gradient-text">
+              <h3 className="text-2xl sm:text-3xl font-bold mb-6 gradient-text">
                 Ready to explore ideas behind numbers?
               </h3>
-              <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-lg">
+              <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-base sm:text-lg px-2">
               Join thousands of others exploring the patterns, numbers, 
               and ideas that shape the world we live in.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button 
                   variant="hero" 
                   size="xl"
-                  className="group relative overflow-hidden magnetic-element"
+                  className="group relative overflow-hidden magnetic-element w-full sm:w-auto"
                   data-magnetic-strength="1.8"
                   onClick={() => window.open('https://youtube.com/@zero2pi', '_blank')}
                 >
@@ -299,7 +299,7 @@ export const AboutSection = () => {
                 <Button 
                   variant="outline" 
                   size="xl"
-                  className="glow-border hover:bg-muted/10 border-primary/30 group magnetic-element"
+                  className="glow-border hover:bg-muted/10 border-primary/30 group magnetic-element w-full sm:w-auto"
                   data-magnetic-strength="1.5"
                 >
                   <Star className="mr-2 h-5 w-5 group-hover:rotate-180 transition-transform duration-500" />

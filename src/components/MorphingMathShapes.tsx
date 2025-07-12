@@ -344,16 +344,21 @@ export const MorphingMathShapes = () => {
 
   // Initialize shapes
   useEffect(() => {
-    if (shapes.length === 0) {
+    if (shapes.length === 0 && canvasRef.current) {
+      const canvas = canvasRef.current;
+      const width = canvas.width;
+      const height = canvas.height;
+      const isMobile = width < 768;
+      
       const initialShapes: MorphingShape[] = [];
       
       for (let i = 0; i < 5; i++) {
         initialShapes.push({
           id: `shape-${i}`,
           type: shapeTypes[i % shapeTypes.length],
-          centerX: Math.random() * 800 + 100,
-          centerY: Math.random() * 400 + 100,
-          size: Math.random() * 60 + 40,
+          centerX: Math.random() * (width - 200) + 100,
+          centerY: Math.random() * (height - 200) + 100,
+          size: Math.random() * (isMobile ? 40 : 60) + (isMobile ? 20 : 40),
           rotation: Math.random() * Math.PI * 2,
           color: colors[i % colors.length],
           opacity: 0.8,
@@ -368,15 +373,22 @@ export const MorphingMathShapes = () => {
   }, []);
 
   const regenerateShapes = () => {
+    if (!canvasRef.current) return;
+    
+    const canvas = canvasRef.current;
+    const width = canvas.width;
+    const height = canvas.height;
+    const isMobile = width < 768;
+    
     const newShapes: MorphingShape[] = [];
     
     for (let i = 0; i < 5; i++) {
       newShapes.push({
         id: `shape-${Date.now()}-${i}`,
         type: shapeTypes[Math.floor(Math.random() * shapeTypes.length)],
-        centerX: Math.random() * 800 + 100,
-        centerY: Math.random() * 400 + 100,
-        size: Math.random() * 80 + 30,
+        centerX: Math.random() * (width - 200) + 100,
+        centerY: Math.random() * (height - 200) + 100,
+        size: Math.random() * (isMobile ? 50 : 80) + (isMobile ? 20 : 30),
         rotation: Math.random() * Math.PI * 2,
         color: colors[Math.floor(Math.random() * colors.length)],
         opacity: 0.8,
