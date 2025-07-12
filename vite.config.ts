@@ -19,5 +19,6 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  // Remove base path since this is now the root GitHub Pages site
+  // Use relative paths for GitHub Pages
+  base: './',
 }));
