@@ -158,45 +158,69 @@ export const AboutSection = () => {
             </Button>
           </div>
           
-          {/* Animated mathematical visualization */}
-          <div className="relative h-32 mb-8 overflow-hidden rounded-2xl bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-sm">
-            <svg className="w-full h-full" viewBox="0 0 400 120">
-              {/* Grid lines */}
+          {/* Mathematical visualization */}
+          <div className="relative h-40 mb-8 overflow-hidden rounded-2xl bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/5 backdrop-blur-sm border border-primary/10">
+            <svg className="w-full h-full" viewBox="0 0 800 160" preserveAspectRatio="xMidYMid meet">
+              {/* Subtle grid */}
               <defs>
-                <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.3"/>
+                <pattern id="mathGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="hsl(var(--primary))" strokeWidth="0.5" opacity="0.1"/>
                 </pattern>
+                <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.8" />
+                  <stop offset="50%" stopColor="hsl(var(--secondary))" stopOpacity="0.9" />
+                  <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.8" />
+                </linearGradient>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                  <feMerge> 
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
               </defs>
-              <rect width="100%" height="100%" fill="url(#grid)" />
               
-              {/* Animated sine wave */}
+              <rect width="100%" height="100%" fill="url(#mathGrid)" />
+              
+              {/* Mathematical function: sin(x) * cos(x/2) */}
               <path
-                d="M0,60 Q100,20 200,60 T400,60"
+                d="M0,80 Q100,40 200,80 Q300,120 400,80 Q500,40 600,80 Q700,120 800,80"
                 fill="none"
-                stroke="url(#gradient)"
+                stroke="url(#waveGradient)"
                 strokeWidth="3"
-                className="animate-pulse"
+                filter="url(#glow)"
+                className="opacity-90"
               />
               
-              {/* Moving point */}
-              <circle
-                r="4"
-                fill="currentColor"
-                className="text-primary"
-              >
+              {/* Secondary wave for depth */}
+              <path
+                d="M0,90 Q150,60 300,90 Q450,120 600,90 Q750,60 800,90"
+                fill="none"
+                stroke="hsl(var(--secondary))"
+                strokeWidth="2"
+                opacity="0.4"
+              />
+              
+              {/* Animated points */}
+              <circle r="5" fill="hsl(var(--primary))" filter="url(#glow)">
                 <animateMotion
-                  dur="4s"
+                  dur="6s"
                   repeatCount="indefinite"
-                  path="M0,60 Q100,20 200,60 T400,60"
+                  path="M0,80 Q100,40 200,80 Q300,120 400,80 Q500,40 600,80 Q700,120 800,80"
                 />
               </circle>
               
-              <defs>
-                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="hsl(var(--primary))" />
-                  <stop offset="100%" stopColor="hsl(var(--secondary))" />
-                </linearGradient>
-              </defs>
+              <circle r="3" fill="hsl(var(--secondary))" opacity="0.8">
+                <animateMotion
+                  dur="8s"
+                  repeatCount="indefinite"
+                  path="M0,90 Q150,60 300,90 Q450,120 600,90 Q750,60 800,90"
+                />
+              </circle>
+              
+              {/* Axis labels */}
+              <text x="20" y="20" fill="hsl(var(--primary))" fontSize="12" opacity="0.6" fontFamily="monospace">f(x) = sin(x)cos(x/2)</text>
+              <text x="720" y="150" fill="hsl(var(--secondary))" fontSize="10" opacity="0.5" fontFamily="monospace">x</text>
             </svg>
           </div>
 
