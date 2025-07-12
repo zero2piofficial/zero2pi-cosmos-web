@@ -19,4 +19,5 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  base: mode === 'production' ? '/zero2pi-cosmos-web/' : '/',
 }));
